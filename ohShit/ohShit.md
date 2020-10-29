@@ -42,3 +42,19 @@ Reason: error in opening zip file
 ##### 状态：<font color=#008000 >已解决</font>
 
 ##### 解决办法：直接浏览器下载gradle-6.2-all.zip文件，复制到指定文件夹中
+
+------
+### 3、
+#### 问题描述：运行`yarn android`报错
+```
+Could not determine the dependencies of task ':app:installDebug'.
+> Failed to install the following Android SDK packages as some licences have not been accepted.
+     build-tools;28.0.3 Android SDK Build-Tools 28.0.3
+     platforms;android-29 Android SDK Platform 29
+```
+
+##### 状态：<font color=#008000 >已解决</font>
+
+##### 解决办法：Android SDK文件夹内的build-tools文件夹内缺28.0.3，platforms文件夹内缺android-29，下好文件解压放进去就行了
+
+
