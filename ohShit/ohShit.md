@@ -25,3 +25,20 @@ mian属性中就记录了art-template的入口模块
 如果package.json文件不存在或者main指定的入口模块也没有，则node会自动找该目录下的index.js作为默认备选项
 > 6. 若以上所有任何一个条件都不成立，则会进入上一级目录中的node_modules目录查找，规则如上
 > 7. 如果上一级还没有，则继续往上上一级查找，知道磁盘根目录还找不到，最后报错：can not find module xxx，==反正要找到node_modules目录==
+
+
+-----
+
+### 2、
+#### 问题描述：
+
+运行`yarn android`报错
+
+```
+Could not unzip C:\Users\Administrator\.gradle\wrapper\dists\gradle-6.2-all\dvufqs6kielxeao781pmk5huj\gradle-6.2-all.zip to C:\Users\Administrator\.gradle\wrapper\dists\gradle-6.2-all\dvufqs6kielxeao781pmk5huj.
+Reason: error in opening zip file
+```
+
+##### 状态：<font color=#008000 >已解决</font>
+
+##### 解决办法：直接浏览器下载gradle-6.2-all.zip文件，复制到指定文件夹中

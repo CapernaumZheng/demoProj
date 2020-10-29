@@ -110,3 +110,7 @@ Yarn约等于npm
 
 2. 检查是否有设备链接
   `adb devices`
+
+3. 打包命令
+    `react-native run-android`
+   `yarn android` 
