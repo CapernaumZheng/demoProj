@@ -80,3 +80,33 @@ C --> D(得到一个原生性质的APP)
 > 5. 解压`build-tools_r23.0.1-windows.zip(react-native必须依赖这个)`、`build-tools_r23.0.2-windows.zip(weex必须依赖这个)`和`build-tools_r23.0.3-windows.zip`，并将解压出来的文件夹，分别改名为版本号`23.0.1`、`23.0.2`和`23.0.3`；在安装目录中新建文件夹`build-tools`，并将改名为版本号之后的文件夹，放到新创建出来的`build-tools`文件夹下
 > 6. 在安装目录中，新建`extras`文件夹，在`extras`文件夹下新建`android`文件夹；解压`m2responsitory`文件夹和`support`文件夹，放到新建的`extras -> android`文件夹下
 > 7. 配置安装环境变量：在系统环境变量中新建`ANDROID_HOME`，值为android SDK Manager的安装路径`C:\Users\liulongbin\AppData\Local\Android\android-sdk`，紧接着，在Path中新增`;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools;`
+
+
+----
+
+#### Yarn、React Native的命令行工具(react-native-cli)
+
+Yarn约等于npm
+1. 设置镜像源：
+`yarn config set registry https://registry.npm.taobao.org --global`
+`yarn config set disturl https://npm.taobao.org/dist --global`
+<br/><br/>
+2. 更新npm命令：
+`npm i npm -g`
+
+#### 创建一个项目
+
+1. 命令行运行`react-native init 项目名`
+
+> Run instructions for iOS:
+    • cd "E:\VSCodeProject\demoProj\reactLearn\myrn01" && npx react-native run-ios
+    - or -
+    • Open myrn01\ios\myrn01.xcodeproj in Xcode or run "xed -b ios"
+    • Hit the Run button
+
+> Run instructions for Android:
+    • Have an Android emulator running (quickest way to get started), or a device connected.
+    • cd "E:\VSCodeProject\demoProj\reactLearn\myrn01" && npx react-native run-android
+
+2. 检查是否有设备链接
+  `adb devices`
