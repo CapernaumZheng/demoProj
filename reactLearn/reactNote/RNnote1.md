@@ -108,7 +108,7 @@ Yarn约等于npm
     • Have an Android emulator running (quickest way to get started), or a device connected.
     • cd "E:\VSCodeProject\demoProj\reactLearn\myrn01" && npx react-native run-android
 
-2. 检查是否有设备链接
+2. 检查是否有设备链接 
   `adb devices`
 
 3. 打包命令
