@@ -209,5 +209,5 @@ class Test extends React.Component {
 1. 为了可读性，把返回的React元素拆分为多行，同时外层加小括号  
 2. state的数据不能直接修改
 3. 传给子组件的onClick可以起任意的名字
-4. 在 React 中，有一个命名规范，通常会将代表事件的监听 prop 命名为 on[Event]，将处理事件的监听方法命名为 handle[Event] 这样的格式。
+4. 在 React 中，有一个命名规范，通常会将代表事件的监听 prop 命名为 on[Event]，将处理事件的监听方法命名为 handle[Event] 这样的格式。 
 </font>
