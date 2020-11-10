@@ -211,3 +211,15 @@ class Test extends React.Component {
 3. 传给子组件的onClick可以起任意的名字
 4. 在 React 中，有一个命名规范，通常会将代表事件的监听 prop 命名为 on[Event]，将处理事件的监听方法命名为 handle[Event] 这样的格式。 
 </font>
+
+
+### 6. 函数组件
+组件只包含render方法，不包含state，使用函数组件更简单
+```
+function Square(props) {
+    return (
+        <button className="square" onClick={props.onClick}>
+            {props.value}
+        </button>
+    )
+}
