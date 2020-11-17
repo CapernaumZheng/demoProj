@@ -57,4 +57,27 @@ Could not determine the dependencies of task ':app:installDebug'.
 
 ##### 解决办法：Android SDK文件夹内的build-tools文件夹内缺28.0.3，platforms文件夹内缺android-29，下好文件解压放进去就行了
 
+------
+###  4、
+#### 问题描述： js无法获取响应header的Content-Disposition字段（控制台看到了返回头，但是js获取不到）  
+#### 发送协议请求一个文件流，需要在回包里拿到响应头里的Content-Disposition字段的值，从中分离出文件名，控制台可以看到，但是js获取不到
+
+##### 状态：<font color=#008000 >已解决</font>
+
+### 原因：
+根据MDN文档：Access-Control-Expose-Headers
+默认情况下，header只有六种 simple response headers （简单响应首部）可以暴露给外部：
+Cache-Control
+Content-Language
+Content-Type
+Expires
+Last-Modified
+Pragma
+这里的暴露给外部，意思是让客户端可以访问得到，既可以在Network里看到，也可以在代码里获取到他们的值。
+上面问题提到的content-disposition不在其中，所以即使服务器在协议回包里加了该字段，但因没“暴露”给外部，客户端就“看得到，拿不到”。
+而响应首部 Access-Control-Expose-Headers 就是控制“暴露”的开关，它列出了哪些首部可以作为响应的一部分暴露给外部。
+所以如果想要让客户端可以访问到其他的首部信息，服务器不仅要在heade里加入该首部，还要将它们在 Access-Control-Expose-Headers 里面列出来
+#### 解决办法：
+返回头设置：
+`res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition')`
 
