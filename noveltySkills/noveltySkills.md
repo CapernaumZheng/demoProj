@@ -81,3 +81,24 @@
 然后你手机连接的该Wi-Fi网速就变慢了，可以用来模拟网速较差的情况了，赶快去测试吧！
 
 >> 作者：原文链接：https://www.jianshu.com/p/85784760b83b来源
+
+
+-----
+
+
+## 编写解释器，英文开源教材
+
+http://craftinginterpreters.com/contents.html
+
+---
+
+## 图片加载失败兜底
+
+https://www.zhangxinxu.com/wordpress/2020/10/css-style-image-load-fail/
+
+---
+
+## node-sass安装解决方案
+
+https://blog.csdn.net/ken_ding/article/details/85623092
+
