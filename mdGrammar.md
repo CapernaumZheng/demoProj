@@ -102,6 +102,14 @@ if(a == b) {
 }
 ```
 
+3. 代码块diff效果
+```diff
+function addTwoNumbers (num1, num2) {
+-  return 1 + 2
++  return num1 + num2
+}
+```
+
 
 ## <center><font face="黑体">八、表格</font></center>
 
