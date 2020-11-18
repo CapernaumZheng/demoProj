@@ -81,3 +81,20 @@ Pragma
 返回头设置：
 `res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition')`
 
+------
+###  5、
+#### 问题描述： element-ui框架中Message组件连续调用重叠问题
+
+##### 状态：<font color=#008000 >已解决</font>
+
+#### 解决办法：
+
+```
+setTimeout(()=> {
+  this.$message({
+      message: '提示信息',
+      showClose: true
+  })
+},0)
+```
+

@@ -114,3 +114,29 @@ Yarn约等于npm
 3. 打包命令
     `react-native run-android`
    `yarn android` 
+
+ -----
+
+## Weex创建项目
+
+1. 运行`npm install -g weex-toolkit`安装Weex官方提供的weex-toolkit脚手架工具到全局环境中
+2. 运行`weex create project-name`初始化Weex项目
+3. 进入到项目根目录运行`weex paltform add android`
+4. 进入到项目根目录中，打开DOS窗口，运行`weex platform add android`安装Android模板，首次安装模板时，等待时间较长，建议fq安装模板
+5. 运行`weex run android`打包部署weex项目
+
+## weex Not find android emulator!
+```
+{"ErrorMemory":"ErrorMemory","type":"ANDROID_EMULATOR_NOT_FIND","message":"Not find android emulator!"}
+```
+首先找到weex-tools安装目录
+### 1.没有安装模拟器，找到 \nodemodules\@weex-cli_device@2.0.0-beta.2@@weex-cli\device\node_modules\@weex-cli\utils\lib\android\android-env.js 函数 getEmulatorPath 中 注释
+```throw error_list_1.ANDROID_EMULATOR_NOT_FIND```
+### 2.环境变量的路径有特殊字符， 找到 \nodemodules\@weex-cli_device@2.0.0-beta.2@@weex-cli\device\lib\android\android-devices.js 函数 getAndroidDevicesList中 修改
+
+`const text = process_js_1.runAndGetOutput('${this.androidSdk.ANDROID_ADB_PATH'} devices -l);`
+
+为
+`const text = process_js_1.runAndGetOutput('adb devices -l')`
+
+#### 还是跑不起来！淦！

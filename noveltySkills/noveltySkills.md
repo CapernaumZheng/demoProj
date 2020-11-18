@@ -102,3 +102,10 @@ https://www.zhangxinxu.com/wordpress/2020/10/css-style-image-load-fail/
 
 https://blog.csdn.net/ken_ding/article/details/85623092
 
+
+----
+
+##  Axios取消终止请求（上传文件时撤销）
+http://www.axios-js.com/zh-cn/docs/#%E5%8F%96%E6%B6%88 
+##  Axios上传文件获取进度
+https://blog.csdn.net/m0_46627730/article/details/107284898
