@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue</title>
+</head>
+<body>
+  <!-- 宿主文件 -->
+  <div id="app">
+    <h2 :title="title">
+      <!-- 插值文本 -->
+      {{ title }}
+    </h2>
+    <div v-for="item in list" :key="item">
+        {{ item }}
+    </div>
+    <input v-model="value" type="text" />
+    <button @click="submit"></button>
+  </div>
+  <script src="./vue.js"></script>
+
+  <script>
+    // 1.创建Vue实例
+   const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          title: 'vue基础',
+          value: 'dd',
+          list: ['测试1','测试2','测试3']
+        }
+      },
+      methods: {
+        submit() {
+          alert('提交')
+        }
+      },
+    })
+  </script>
+</body>
+</html>
