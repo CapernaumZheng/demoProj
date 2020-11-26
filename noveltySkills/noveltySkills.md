@@ -109,3 +109,10 @@ https://blog.csdn.net/ken_ding/article/details/85623092
 http://www.axios-js.com/zh-cn/docs/#%E5%8F%96%E6%B6%88 
 ##  Axios上传文件获取进度
 https://blog.csdn.net/m0_46627730/article/details/107284898
+
+
+-----
+
+### vscode设置jsx中标签自动补全
+1. vscode设置中搜索emmet.include
+2. 设置为 ->"emmet.includeLanguages": { "javascript":"javascriptreact" }
