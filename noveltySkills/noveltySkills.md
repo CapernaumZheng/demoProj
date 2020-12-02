@@ -116,3 +116,29 @@ https://blog.csdn.net/m0_46627730/article/details/107284898
 ### vscode设置jsx中标签自动补全
 1. vscode设置中搜索emmet.include
 2. 设置为 ->"emmet.includeLanguages": { "javascript":"javascriptreact" }
+
+
+-----
+
+### [《编程之道》](https://github.com/yikeke/tao-of-programming)
+
+-----
+
+### npm查看包版本等
+
+- 查看webpack版本列表
+  + `npm view webpack versions`
+  + `npm info webpack`
+- 查看webpack最新版本
+  + `npm view webpack version`
+- 升级webpack
+  + `npm update webpack --save-dev`
+- 安装最新的webpack
+  + `npm i webpack@latest --save-dev`
+- 查看已安装的包列表
+  + `npm list`
+- 查看安装的webpack版本信息
+  + `npm list webpack`  
+
+
+-----
