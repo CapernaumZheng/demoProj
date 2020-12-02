@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lifecycle</title>
+</head>
+<body>
+    <div id="app">
+        <h3>{{title}}</h3>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title: '生命周期'
+                }
+            },
+            beforeCreate () {
+                console.log('beforeCreate :>> ', )
+            },
+            created () {
+                console.log('created', this.$el)
+            },
+            beforeMount () {
+                console.log('beforeMount :>> ')
+            },
+            mounted () {
+                setTimeout(() => {
+                    this.title = '生命周期变更'
+                }, 2000);
+                console.log('mounted :>> ', this.$el)
+            },
+            beforeUpdate () {
+                console.log('beforeUpdate :>> ',)
+            },
+            updated () {
+                console.log('updated :>> ', )
+            },
+        })
+    </script>
+</body>
+</html>

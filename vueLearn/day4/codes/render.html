@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Render</title>
+</head>
+<body>
+    <div id="app">
+        <heading :level="1" :title="title" :icon="'test'">{{title}}</heading>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+
+        // heading组件
+        // <heading :title="title">{{title}}</heading>
+        Vue.component('heading', {
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                },
+                title: {
+                    type: String,
+                    default: ''
+                },
+                icon: String
+            },
+            render(h) {
+                // 子节点数组
+                let children = []
+
+                // icon属性处理逻辑
+                if(this.icon) {
+                   // <span>
+                   //    <img src="./test.svg" alt="小狗">
+                   // </span>
+                    children.push(h(
+                        'span',
+                        {class: 'icon'},
+                        [h(
+                            'img',
+                            {attrs: {src: './' + this.icon + '.svg'}}
+                        )]
+                    ))
+                }
+
+                // 拼接子节点
+
+                children = children.concat(this.$slots.default)
+
+                const vnode = h(
+                    'h' + this.level,
+                    {attrs: {title: this.title}},
+                    children
+                )
+
+
+                // const vnode = h(
+                //     'h' + this.level,
+                //     {attrs: {title: this.title}},
+                //     this.$slots.default
+                // )
+                console.log('vnode :>> ', vnode)
+                return vnode
+            },
+            // render(h) {
+            //  return h(
+            //         'h' + this.level,  // 参数1: tag name
+            //         this.$slots.default // 参数3:子节点VNode数组
+            //     ) 
+            // },
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title: 'render函数'
+                }
+            },
+        })
+    </script>
+</body>
+</html>

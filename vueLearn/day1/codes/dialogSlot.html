@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>弹窗组件插槽</title>
+    <style>
+        .message-box {
+            padding: 10px 20px;
+            background: #4fc08d;
+            border: 1px solid #42b983;
+        }
+        .message-box-close {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 插槽实现内容分发 -->
+        <!-- <message :show="show" @close="show=$event">新增成功</message> -->
+
+        <message :show.sync="show">
+            <template v-slot:title>
+                <h3>提示信息</h3>
+            </template>
+            <!-- 作用域插槽 -->
+            <!-- <template v-slot:title="slotProps">
+                <strong>{{slotProps.title}}</strong>
+            </template> -->
+            新增成功
+        </message>
+
+        <!-- 列表组件 -->
+        <my-list :list="list"></my-list>
+        <!-- 新增组件 -->
+        <my-add @add-one="addList" v-model="test"></my-add>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // 弹窗组件
+        Vue.component('message', {
+            props: ['show'],
+            template: `
+                <div class="message-box" v-if="show">
+                    <!--通过slot插槽获取传入内容-->   
+                    <slot name="title" title="msg标题">默认</slot>
+                    <slot></slot> 
+                    <span class="message-box-close" @click="$emit('update:show', false)">X</span>
+                </div>
+            `,
+
+        })
+
+        // 新增组件-实现双绑
+        Vue.component('my-add', {
+            props: {
+                // 这里是固定的value
+                // 因为v-model转化为:value=""
+                value: {
+                    type: String,
+                    default: ''
+                }
+            },
+            template: `
+                <div>
+                    <input type="text" :value="value"
+                    @input="onInput"
+                    v-on:keydown.enter="addList">
+                    <button @click="addList">新增</button>
+                </div>
+            `,
+            methods: {
+                addList() {
+                    this.$emit('add-one')
+                },
+                onInput(e) {
+                    this.$emit('input', e.target.value)
+                }
+            },
+        })
+
+        // 列表组件
+        Vue.component('my-list', {
+            data() {
+                return {
+                    selected: ''
+                }
+            },
+            props: {
+                list: {
+                    type: Array,
+                    default: []
+                }
+            },
+            template: `
+            <div>
+                <p v-if="list.length === 0">没有数据</p>
+                <!-- 列表渲染 -->
+                <div v-for="item in list" :key="item" 
+                    :class="{active: selected === item}"
+                    @click="selected = item"
+                    v-else>
+                    {{ item }}
+                </div>
+            </div>
+            `
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    show: false,
+                    test: '',
+                    selected: '',
+                    totalCount: 0,
+                    list: []
+                }
+            },
+            methods: {
+                addList() {
+                    this.test && this.list.push(this.test)
+                    this.test = ''
+                    // 显示提示信息
+                    this.show = true
+                }
+            },
+        })
+    </script>
+</body>
+</html>

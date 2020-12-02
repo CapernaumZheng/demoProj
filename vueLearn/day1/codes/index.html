@@ -1,42 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vue</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            background: #ddd;
+        }
+    </style>
 </head>
 <body>
-  <!-- 宿主文件 -->
-  <div id="app">
-    <h2 :title="title">
-      <!-- 插值文本 -->
-      {{ title }}
-    </h2>
-    <div v-for="item in list" :key="item">
-        {{ item }}
+    <div id="app">
+        <h3 :title="title">{{title}}</h3>
+        <p v-if="list.length === 0">没有数据</p>
+        <!-- 列表渲染 -->
+        <div v-for="item in list" :key="item" 
+            :class="{active: selected === item}"
+            @click="selected = item"
+            v-else>
+            {{ item }}
+        </div>
+        <!-- <div v-for="item in list" :key="item"
+            @click="selected = item"
+            :style="{backgroundColor: selected === item ? '#ddd' : 'transparent'}">
+            {{ item }}
+        </div> -->
+        <input type="text" v-model="value" v-on:keydown.enter="addList">
+        <button @click="addList">新增</button>
+        <p>
+            <!-- 总数:{{list.length + '个'}} -->
+            <!-- 计算属性 -->
+            总数： {{total}}
+            <!-- 监听器 -->
+            总数： {{totalCount}}
+        </p>
     </div>
-    <input v-model="value" type="text" />
-    <button @click="submit"></button>
-  </div>
-  <script src="./vue.js"></script>
+    <script src="./vue.js"></script>
+    <script>
+        // 模拟异步数据的调用
+        function getList() {
+           return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(['苹果','栗子'])
+                }, 2000);
+           })
+        }
 
-  <script>
-    // 1.创建Vue实例
-   const app = new Vue({
-      el: '#app',
-      data() {
-        return {
-          title: 'vue基础',
-          value: 'dd',
-          list: ['测试1','测试2','测试3']
-        }
-      },
-      methods: {
-        submit() {
-          alert('提交')
-        }
-      },
-    })
-  </script>
+        // 1.创建vue实例
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title: 'vue基础',
+                    value: '',
+                    selected: '',
+                    totalCount: 0,
+                    list: []
+                }
+            },
+            // 生命周期钩子
+            async created () {
+                // 组件实例已创建，由于未挂载，dom不存在
+                const list = await getList()
+                this.list = list
+            },
+            mounted () {
+                ;
+            },
+            // watch: {
+            //     // 默认情况下watch初始化时不执行
+            //     list(newValue, oldValue) {
+            //         this.totalCount = newValue.length + '个'
+            //     }
+            // },
+            watch: {
+                list: {
+                    // 立即执行
+                    immediate: true,
+                    // 深度监听
+                    deep: true,
+                    handler(newValue, oldValue) {
+                        this.totalCount = newValue.length + '个'
+                    }
+                }
+            },
+            computed: {
+                total() {
+                    return this.list.length + '个' 
+                }
+            },
+            methods: {
+                addList() {
+                    this.value && this.list.push(this.value)
+                    this.value = ''
+                }
+            },
+        })
+    </script>
 </body>
 </html>

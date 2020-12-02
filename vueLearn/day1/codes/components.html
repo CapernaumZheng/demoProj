@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3 :title="title">{{title}}</h3>
+
+        <!-- 列表组件 -->
+        <my-list :list="list"></my-list>
+
+        <!-- <my-add @add-one="addList"></my-add> -->
+
+        <my-add @add-one="addList" v-model="test"></my-add>
+
+
+        <p>
+            <!-- 总数:{{list.length + '个'}} -->
+            <!-- 计算属性 -->
+            总数： {{total}}
+            <!-- 监听器 -->
+            总数： {{totalCount}}
+        </p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // 模拟异步数据的调用
+        function getList() {
+           return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(['苹果','栗子'])
+                }, 2000);
+           })
+        }
+
+        // 列表组件
+        Vue.component('my-list', {
+            data() {
+                return {
+                    selected: ''
+                }
+            },
+            props: {
+                list: {
+                    type: Array,
+                    default: []
+                }
+            },
+            template: `
+            <div>
+                <p v-if="list.length === 0">没有数据</p>
+                <!-- 列表渲染 -->
+                <div v-for="item in list" :key="item" 
+                    :class="{active: selected === item}"
+                    @click="selected = item"
+                    v-else>
+                    {{ item }}
+                </div>
+            </div>
+            `
+        })
+
+        // // 新增组件
+        // Vue.component('my-add', {
+        //     data() {
+        //         return {
+        //             value: ''
+        //         }
+        //     },
+        //     template: `
+        //         <div>
+        //             <input type="text" v-model="value" v-on:keydown.enter="addList">
+        //             <button @click="addList">新增</button>
+        //         </div>
+        //     `,
+        //     methods: {
+        //         addList() {
+        //             this.$emit('add-one', this.value)
+        //             this.value = ''
+        //         }
+        //     },
+        // })
+
+         // 新增组件-实现双绑
+        Vue.component('my-add', {
+            props: {
+                // 这里是固定的value
+                // 因为v-model转化为:value=""
+                value: {
+                    type: String,
+                    default: ''
+                }
+            },
+            template: `
+                <div>
+                    <input type="text" :value="value"
+                    @input="onInput"
+                    v-on:keydown.enter="addList">
+                    <button @click="addList">新增</button>
+                </div>
+            `,
+            methods: {
+                addList() {
+                    this.$emit('add-one')
+                },
+                onInput(e) {
+                    this.$emit('input', e.target.value)
+                }
+            },
+        })
+
+        // 1.创建vue实例
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title: 'vue基础',
+                    test: '',
+                    selected: '',
+                    totalCount: 0,
+                    list: []
+                }
+            },
+            // 生命周期钩子
+            async created () {
+                // 组件实例已创建，由于未挂载，dom不存在
+                const list = await getList()
+                this.list = list
+            },
+            mounted () {
+            },
+            watch: {
+                list: {
+                    // 立即执行
+                    immediate: true,
+                    // 深度监听
+                    deep: true,
+                    handler(newValue, oldValue) {
+                        this.totalCount = newValue.length + '个'
+                    }
+                }
+            },
+            computed: {
+                total() {
+                    return this.list.length + '个' 
+                }
+            },
+            methods: {
+                // addList(val) {
+                //     val && this.list.push(val)
+                // }
+                addList() {
+                    this.test && this.list.push(this.test)
+                    this.test = ''
+                }
+            },
+        })
+    </script>
+</body>
+</html>
