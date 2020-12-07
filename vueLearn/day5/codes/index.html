@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数式组件</title>
+</head>
+<body>
+    <div id="app">
+        <heading :level="1" :title="title" :icon="'test'">{{title}}</heading>
+    </div>
+    <script src="../../day1/codes/vue.js"></script>
+    <script>
+
+        Vue.component('heading', {
+            functional: true,
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                },
+                title: {
+                    type: String,
+                    default: ''
+                },
+                icon: String
+            },
+            render(h, context) {
+                let children = []
+
+                // 属性获取
+                const { icon, title, level } = context.props
+
+                if(icon) {
+                    children.push(h(
+                        'span',
+                        {class: 'icon'},
+                        [h(
+                            'img',
+                            {attrs: {src: '../../day4/codes/' + icon + '.svg'}}
+                        )]
+                    ))
+                }
+
+                // 拼接子节点
+
+                children = children.concat(context.children)
+
+                const vnode = h(
+                    'h' + level,
+                    { attrs: {title} },
+                    children
+                )
+
+                console.log('vnode :>> ', vnode)
+                return vnode
+            },
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title: 'render函数'
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>插件</title>
+</head>
+<body>
+    <div id="app">
+        <heading :level="1" :title="title" :icon="'test'">{{title}}</heading>
+    </div>
+    <script src="../../day1/codes/vue.js"></script>
+    <script src="./heading.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title: 'render函数'
+                }
+            },
+        })
+    </script>
+</body>
+</html>
