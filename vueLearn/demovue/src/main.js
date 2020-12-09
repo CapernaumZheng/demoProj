@@ -4,12 +4,9 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-     
-
-
-           const sss= "aaa"                       ; 
-           console.log('object', sss)
+const sss = 'aaa'
+console.log('object', sss)
 new Vue({
   router,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')
