@@ -84,3 +84,71 @@ $router.push({ name: 'user', params: { userId: '123' }})
 // 带查询参数，变成/register?plan=private
 $router.push({ path: 'register', query: { paln: 'private' }})
 ```
+
+
+##### 路由守卫
+
+全局守卫
+
+```
+router.beforeEach(to, from, next) => {
+  // ...
+  // to: Route: 即将要进入的目标 路由对象
+  // from: Route: 当前导航正要离开的路由
+  // next: Function: 一定要调用该方法来resolve这个钩子
+}
+```
+
+路由独享守卫
+
+```
+{
+  path: '/about',
+  name: 'about',
+  beforeEnter(to, from, next) {
+    //...
+  }
+}
+```
+
+组件内守卫
+
+```
+beforeRouteEnter
+beforeRouteUpdate
+beforeRouteLeave
+```
+(跟生命周期同级)
+
+
+##### 路由数据获取时机
+
+2个时机
+
+路由导航前
+
+```
+// 组件未渲染，通过给next传递回调访问组件实例
+beforeRouteEnter(to, from, next) {
+  getPost(to.params.id, post => {
+    next(vm => vm.setData(post))
+  })
+}
+
+// 组件已渲染，可以调用this直接赋值
+beforeRouteUpdate(to, from, next) {
+  this.post = null
+  getPost(to.params,id, post=> {
+    this.setData(post)
+    next()
+  })
+}
+```
+
+路由导航后
+create生命周期
+
+
+##### 动态路由
+
+通过router.addRoutes(routes)方式动态添加路由
