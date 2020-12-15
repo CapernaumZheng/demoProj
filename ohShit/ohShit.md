@@ -98,3 +98,17 @@ setTimeout(()=> {
 },0)
 ```
 
+------
+###  6、
+#### 问题描述： 多个仓库提交，其中github提示：‘Logon failed, use ctrl+c to cancel basic credential prompt.’
+
+##### 状态：<font color=#008000 >已解决</font>
+
+#### 解决办法：
+
+在git bash 命令行下输入如下的命令
+```
+setx GIT_TRACE ""
+setx GCM_TRACE ""
+```
+之后关闭所有的console，然后在开启一个重新push登陆
