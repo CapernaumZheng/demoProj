@@ -99,3 +99,8 @@ inject: ['foo']
 ```
 #### 实现kForm组件
 1. 安装`npm i async-validator`
+2. 源代码见demovue项目day9
+   
+#### 实现弹窗组件
+
+弹窗组件的特点是它们在当前vue实例之外独立存在，通常挂载于body，通常是js动态创建的，不需要在任何组件中声明
