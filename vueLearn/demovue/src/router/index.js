@@ -21,7 +21,25 @@ const routes = [
   {
     path: '/day9',
     name: 'day9',
-    component: () => import('../views/day9/index.vue')
+    component: () =>
+      import('../views/day9/index.vue'),
+    children: [
+      {
+        path: 'day9params',
+        name: 'day9params',
+        component: () => import('../views/day9/param/index.vue')
+      },
+      {
+        path: 'day9slot',
+        name: 'day9slot',
+        component: () => import('../views/day9/slot/index.vue')
+      },
+      {
+        path: 'day9kform',
+        name: 'day9kform',
+        component: () => import('../views/day9/kForm/index.vue')
+      }
+    ]
   }
 ]
 

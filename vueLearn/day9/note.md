@@ -81,3 +81,21 @@ inject: ['foo']
 ```
 #### 插槽
 插槽语法是Vue实现的内容分发API，用于复合组件开发
+1. 匿名插槽
+```
+<slot></slot>
+<template>页面内容</template>
+```
+2. 具名插槽
+```
+ <slot name="header"></slot>
+ <template v-slot:header>学个习</template>
+```
+3. 作用域插槽
+==插槽内容能够访问子组件中才有的数据==
+```
+<slot name="footer" :fc="footerContent" :nowDay="new Date().getDay()"></slot>
+<template v-slot:footer="{fc, nowDay}">今天周{{nowDay}}---{{fc}}</template>
+```
+#### 实现kForm组件
+1. 安装`npm i async-validator`
