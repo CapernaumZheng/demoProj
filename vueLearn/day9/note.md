@@ -104,3 +104,12 @@ inject: ['foo']
 #### 实现弹窗组件
 
 弹窗组件的特点是它们在当前vue实例之外独立存在，通常挂载于body，通常是js动态创建的，不需要在任何组件中声明
+
+#### 自己实现vue-router
+#### 自己实现vuex
+
+```
+源代码查看同级目录 demovue项目 
+// 实现vue-router   -----   krouter
+// 实现vuex       --------- kstore
+```
