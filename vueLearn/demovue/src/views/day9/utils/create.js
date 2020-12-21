@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Notice from '../Notice.vue'
 
 function create (Component, props) {
   // 组件构造函数如何获取
@@ -23,4 +24,26 @@ function create (Component, props) {
   return comp
 }
 
-export default create
+// function create (Component, props) {
+//     // 组件构造函数如何获取
+//     // 通过Vue.extend()创建
+//     const Ctor = Vue.extend(Component)
+//     const comp = new Ctor({propsData: props})
+//     comp.$mount()
+//     document.body.appendChild(comp.$el)
+//     comp.remove = () => {
+//         // 移除dom
+//         document.body.removeChild(comp.$el)
+//         // 销毁组件
+//         comp.$destroy()
+//     }
+//     return comp
+// }
+
+export default {
+  install (Vue) {
+    Vue.prototype.$notice = function (options) {
+      return create(Notice, options)
+    }
+  }
+}

@@ -1,9 +1,7 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueRouter from './kvue-router'
 import Home from '../views/Home.vue'
-
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',
@@ -11,7 +9,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/admin/:name/:id',
+    path: '/admin',
     name: 'admin',
     component: () =>
       import('../views/Admin.vue')
@@ -40,12 +38,10 @@ const routes = [
     ]
   }
 ]
-
 const router = new VueRouter({
   mode: 'history',
   // eslint-disable-next-line no-undef
   base: process.env.BASE_URL,
   routes
 })
-
 export default router

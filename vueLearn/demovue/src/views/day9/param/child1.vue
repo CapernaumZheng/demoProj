@@ -7,7 +7,7 @@
         <div class="child1">
             <p>子组件自定义事件传参</p>
             <input type="text" v-model="inVal">
-            <button @click="$emit('childtrans', inVal)">点击传递input值</button>
+            <button @click="$emit('childTrans', inVal)">点击传递input值</button>
         </div>
         <!-- 通过$parent中介传递参数 -->
         <div class="child1">
@@ -26,9 +26,8 @@ import grandson from './grandson.vue'
 export default {
   props: {
     msg: String,
-    default: function () {
-      return ''
-    }
+    // eslint-disable-next-line vue/require-prop-type-constructor
+    default: ''
   },
   components: {
     grandson
