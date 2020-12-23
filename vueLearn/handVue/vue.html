@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .pink {
+            color: pink;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 插值 -->
+        <p>{{counter}}</p>
+        <p>{{counter}}</p>
+        <!-- 指令 -->
+        <p class="pink" k-text="counter"></p>
+        <p class="red" k-html="desc"></p>
+    </div>
+
+    <script src="./kvue.js"></script>
+    <script src="./kcompile.js"></script>
+    <script>
+        const app = new kVue({
+            el: '#app',
+            data: {
+                counter: 1,
+                desc: '<span>这里是一个标签</span>'
+            },
+        })
+        setInterval(() => {
+           // app.$data.counter++  // 无代理，这样访问
+            app.counter++
+        }, 1000)
+        
+    </script>
+</body>
+</html>
