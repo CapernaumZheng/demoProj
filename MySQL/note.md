@@ -10,9 +10,13 @@ update mysql.user set authentication_string=PASSWORD('123456'),plugin='mysql_nat
 
 ### 配置root远程登录
 
-开启3306端口
+##### 1.增加外网访问权限
+```
+ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root用户密码';
+FLUSH PRIVILEGES;
+```
 
-##### 编辑配置文件
+##### 2.开放3306端口的访问，编辑配置文件
 `sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf`
 修改 bind-address为0.0.0.0
 
