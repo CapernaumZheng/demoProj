@@ -3,7 +3,7 @@ import axios from 'axios'
 export const $getJson = (url) => {
   return new Promise((resolve, reject) => {
     axios({
-      method: 'get',
+      method: 'post',
       url: url,
       dataType: "json",
       crossDomain: true,

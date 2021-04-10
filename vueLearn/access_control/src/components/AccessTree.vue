@@ -1,11 +1,9 @@
 <template>
   <div>
-    <p>使用 scoped slot</p>
     <el-tree
       :data="treeData"
-      show-checkbox
+      icon-class="el-icon-arrow-right"
       node-key="id"
-      default-expand-all
       :expand-on-click-node="false">
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>
@@ -39,7 +37,7 @@
     },
     methods: {
       async getJsonData() {
-        let res = await $getJson(`${process.env.BASE_URL}json/access_tree.json`);
+        let res = await $getJson('/mock/treeData');
         console.log('获取access_tree.json数据 >> ', JSON.stringify(res.data));
         this.treeData = res.data;
       }
