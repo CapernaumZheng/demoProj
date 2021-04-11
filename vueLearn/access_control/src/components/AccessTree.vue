@@ -67,9 +67,15 @@
       },
       // 
       disabledCheckbox(nodeId) {
+        let diabled = false
         let accessNode = this.treeAccessData.find(item => item.id === nodeId);
         let parentNodeId = accessNode && accessNode.parentIds && accessNode.parentIds[0];
-        return this.treeSelectData[parentNodeId] !== 'part'
+        if(this.treeSelectData[parentNodeId]) {
+          diabled = (this.treeSelectData[parentNodeId] !== 'part');
+        } else {
+          diabled = false
+        }
+        return diabled;
       }
     },
     mounted () {
