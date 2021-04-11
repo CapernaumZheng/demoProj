@@ -1,11 +1,18 @@
 
 import axios from 'axios'
-export const $getJson = (url) => {
+export const $getJson = (url, params={}) => {
   return new Promise((resolve, reject) => {
     axios({
       method: 'post',
       url: url,
-      dataType: "json",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      transformRequest: [function(data) {
+        data = JSON.stringify(data)
+        return data
+      }],
+      data: params,
       crossDomain: true,
       cache: false
     }).then(res => {
@@ -24,6 +31,7 @@ export const $getJson = (url) => {
  * 要实现每个页面灵活的特异性【查看】配置，可能要修改数据结构和程序逻辑，我这里暂不考虑
  */
 const readOnlyMap = ['查看'];
+let allAccessNum = 0;
 
 /**
  * 功能：简单深拷贝
@@ -53,6 +61,7 @@ export const isRootNode = (nodeId, treeList) => {
 export const getAllPagesAccess = (treeList, accessList = [], parentIds = []) => {
   if(!Array.isArray(treeList)) throw new Error('树渲染数据必须是数组');
   treeList.forEach((item, idx) => {
+    allAccessNum++;
     if(item.children) {
       parentIds.unshift(item.id);
       getAllPagesAccess(item.children, accessList, parentIds);
@@ -63,7 +72,7 @@ export const getAllPagesAccess = (treeList, accessList = [], parentIds = []) => 
       parentIds.length > 0  && parentIds.splice(0,1);
     }
   })
-  return accessList
+  return {configAccessList: accessList, allAccessNum: allAccessNum}
 }
 
 /**

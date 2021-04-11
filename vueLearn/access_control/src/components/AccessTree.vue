@@ -1,46 +1,58 @@
 <template>
   <div class="tree-area">
-    <el-tree
-      :data="treeData"
-      icon-class="el-icon-arrow-right"
-      :highlight-current="false"
-      node-key="id"
-      :expand-on-click-node="false">
-      <span class="custom-tree-node" slot-scope="{ node, data }">
-        <span>{{ node.label }}</span>
-        <span>
-        <!-- 如果节点有children，认为是页面，显示选择框 -->
-        <el-select class="tree-select" placeholder="请选择" size="mini" 
-          v-model="treeSelectData[data.id]"
-          v-if="data.children && data.children.length > 0"
-          @change="val => handleTreeSelectChanged(val, data.id)">
-          <el-option
-            v-for="item in treeOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-        <!-- 如果节点没有children，认为是页面上的按钮权限，显示勾选框-->
-        <el-checkbox  class="tree-checkbox" :true-label="data.id" :false-label="''" 
-          v-model="treeSelectData[data.id]" :disabled="disabledCheckbox(data.id)"
-          @change="val => handleTreeCheckBoxChanged(val, data.id)"
-          v-else>
-        </el-checkbox>
+    <el-form :disabled="isView">
+      <el-tree
+        :data="treeData"
+        icon-class="el-icon-arrow-right"
+        :highlight-current="false"
+        node-key="id"
+        :expand-on-click-node="false">
+        <span class="custom-tree-node" slot-scope="{ node, data }">
+          <span>{{ node.label }}</span>
+          <span>
+          <!-- 如果节点有children，认为是页面，显示选择框 -->
+          <el-select class="tree-select" placeholder="请选择" size="mini" 
+            v-model="treeSelectData[data.id]"
+            v-if="data.children && data.children.length > 0"
+            @change="val => handleTreeSelectChanged(val, data.id)">
+            <el-option
+              v-for="item in treeOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+          <!-- 如果节点没有children，认为是页面上的按钮权限，显示勾选框-->
+          <el-checkbox  class="tree-checkbox" :true-label="data.id" :false-label="''" 
+            v-model="treeSelectData[data.id]" :disabled="disabledCheckbox(data.id)"
+            @change="val => handleTreeCheckBoxChanged(val, data.id)"
+            v-else>
+          </el-checkbox>
+          </span>
         </span>
-      </span>
-    </el-tree>
+      </el-tree>
+    </el-form>
   </div>
 </template>
 
 <script>
   export default {
     name: "accessTree",
+    props: {
+      treeSelectData: {
+        type: Object,
+        default: function () {
+          return {}
+        },
+        required: true
+      }
+    },
     data() {
       return {
+        isView: false,
         treeData: [],        // 绘制tree的数据
-        treeSelectData: {},  // tree的状态数据
         treeAccessData: {},  // tree页面元素权限数据
+        allAccessNum: 0,
         treeOptions: [
           {value: 'total', label: '完全'},
           {value: 'read', label: '只读'},
@@ -55,7 +67,10 @@
         let res = await this.$tools.$getJson('/mock/treeData');
         console.log('获取access_tree.json数据 >> ', JSON.stringify(res.data));
         this.treeData = res.data;
-        this.treeAccessData = this.$tools.getAllPagesAccess(res.data);
+        let { configAccessList, allAccessNum } = this.$tools.getAllPagesAccess(res.data);
+        this.treeAccessData = configAccessList;
+        this.allAccessNum = allAccessNum;
+        this.$emit('sendData', { allAccessNum: this.allAccessNum });
       },
       // 处理树下拉框选择
       handleTreeSelectChanged(val, nodeId) {
