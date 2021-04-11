@@ -24,6 +24,7 @@
         <!-- 如果节点没有children，认为是页面上的按钮权限，显示勾选框-->
         <el-checkbox  class="tree-checkbox" :true-label="data.id" :false-label="''" 
           v-model="treeSelectData[data.id]" :disabled="disabledCheckbox(data.id)"
+          @change="val => handleTreeCheckBoxChanged(val, data.id)"
           v-else>
         </el-checkbox>
         </span>
@@ -58,14 +59,13 @@
       },
       // 处理树下拉框选择
       handleTreeSelectChanged(val, nodeId) {
-        if(this.$tools.isRootNode(nodeId, this.treeData)) {
-          // 是根节点
-          this.$tools.updateAccessByRootNode(this, nodeId);
-        } else {
-          // 不是根节点
-        }
+        this.$tools.updateAccessBySelect(this, nodeId);
       },
-      // 
+      // 处理checkbox勾选
+      handleTreeCheckBoxChanged(val, nodeId) {
+        this.$tools.updateAccessByCheckbox(this, nodeId);
+      },
+      // 置灰checkbox
       disabledCheckbox(nodeId) {
         let diabled = false
         let accessNode = this.treeAccessData.find(item => item.id === nodeId);

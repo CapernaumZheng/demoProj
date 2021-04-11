@@ -13,10 +13,10 @@
       </el-col>
     </el-row>
     <el-row :gutter="20">
-      <el-col :span="16">
+      <el-col :span="12">
         <access-tree ref="tree"></access-tree>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="12">
         <h5>树的状态信息：</h5>
         {{treeStatusData}}
       </el-col>
