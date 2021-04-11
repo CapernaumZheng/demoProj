@@ -1,0 +1,11 @@
+.el-tree-node {
+  padding-top: 15px;
+  &:focus,&:hover> {
+    .el-tree-node__content {
+      background-color: transparent;
+    }
+  }
+}
+.el-icon-arrow-right {
+  font-size: 20px;
+}
