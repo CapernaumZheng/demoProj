@@ -1,16 +1,34 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-function countReducer (state = 0, action) {
+const initalUserInfo = {
+  isLogin: false,
+  user: {
+    name: null
+  }
+};
+
+//定义修改规则 登录
+function loginReducer (state = { ...initalUserInfo }, action) {
   switch (action.type) {
-    case "ADD":
-      return state + 1;
-    case "MINUS":
-      return state - 1;
+    case 'LOGIN_SUCCESS':
+      return {
+        isLogin: true,
+        user: {
+          name: 'zack'
+        }
+      };
+    case 'LOGOUT_SUCCESS':
+      return {
+        isLogin: false,
+        user: {
+          name: null
+        }
+      }
     default:
       return state;
   }
 }
 
-const store = createStore(countReducer);
+const store = createStore(combineReducers({ user: loginReducer }))
 
 export default store;
