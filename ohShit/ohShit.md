@@ -112,3 +112,36 @@ setx GIT_TRACE ""
 setx GCM_TRACE ""
 ```
 之后关闭所有的console，然后在开启一个重新push登陆
+
+### 7 、Debian安装NVM出错
+Failed to connect to raw.githubusercontent.com port 443
+
+问题
+
+执行 sudo docker-compose up -d nginx mysql指令，报错：
+
+Service 'workspace' failed to build. Failed to connect to raw.githubusercontent.com port 443: Connection refused. /bin/sh: 1: .: Can't open /home/laradock/.nvm/nvm.sh
+
+原因
+
+由于某些你懂的因素，导致GitHub的raw.githubusercontent.com域名解析被污染了。
+
+解决方法
+
+通过修改hosts解决此问题。
+
+查询真实IP
+
+在https://www.ipaddress.com/查询raw.githubusercontent.com的真实IP。
+
+修改hosts
+
+sudo vim /etc/hosts
+
+添加如下内容：
+
+199.232.28.133 raw.githubusercontent.com
+
+重新执行
+
+重新执行sudo docker-compose up -d nginx mysql 即可。
