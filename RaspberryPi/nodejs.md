@@ -11,6 +11,5 @@
     https://github.com/nvm-sh/nvm
    第一步：安装：`wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash` 
    第二步：退出系统或运行`source ~/.profile`
-   第三步：
 
 
