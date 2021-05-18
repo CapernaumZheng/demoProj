@@ -23,6 +23,9 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
+### 查看Docker状态
+`sudo service docker status`
+
 ### 查看Docker的正在运行的进程
 `docker ps`
 
@@ -41,3 +44,4 @@ sudo systemctl restart docker
 
 ### 删除某一个Docker进程
 `docker rm 'id前3位'`
+
