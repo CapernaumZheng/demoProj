@@ -92,7 +92,7 @@
 使用\`\`\`
 
 代码块如下：
-```
+```javascript
 var a = 'a'
 var b= 'b'
 if(a == b) {
