@@ -10,6 +10,7 @@ const bodyParser = require('koa-bodyparser')
 // routes
 const index = require('./routes/index')
 const reactAdmin = require('./routes/react-admin')
+const reactMobileWeb = require('./routes/react-mobile-web')
 
 // error handler
 onerror(app)
@@ -31,6 +32,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(reactAdmin.routes(), reactAdmin.allowedMethods())
+app.use(reactMobileWeb.routes(), reactMobileWeb.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
