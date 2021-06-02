@@ -21,7 +21,9 @@
     "koa-logger": "^3.2.1",
     "koa-onerror": "^4.1.0",
     "koa-router": "^10.0.0",
+    "koa-session": "^6.2.0",
     "koa2-cors": "^2.0.6",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "svg-captcha": "^1.4.0"
   }
 }
